@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Letters</title>
+  </head>
+  <body>
+    <div id="created-data"></div>
+  </body>
+  <script>
+    // fetch("http://localhost:3000/")
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     const message = data.message;
+    //     const container = document.getElementById("new-message");
+    //     container.append(message);
+    //   })
+    //   .catch((error) => console.error("Error fetching data:", error));
+
+    // fetch("http://localhost:3000/news")
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     const message = data.message;
+    //     const container = document.getElementById("new-news");
+    //     container.append(message);
+    //   })
+    //   .catch((error) => console.error("Error fetching data:", error));
+
+    fetch("http://localhost:3000/news", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: "Russia attacks USA",
+        content: "War broke out between Russia and USA. lorem ipsum dolor sit emet",
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const createdData = data;
+        const container = document.getElementById("created-data");
+        data.forEach((news) => {
+          console.log(news);
+          const heading = document.createElement("h1");
+          heading.innerText = news.news.title;
+          const div = document.createElement("div");
+          div.innerText = news.news.content;
+
+          container.appendChild(heading);
+          container.appendChild(div);
+        });
+        // container.innerText = message;
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  </script>
+</html>
